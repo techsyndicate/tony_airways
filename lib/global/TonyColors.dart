@@ -3,7 +3,7 @@ import 'package:tony_airways/main.dart';
 
 class TonyColors {
   static Color ts = HexColor.fromHex("#16e16e");
-  static Color c1 = HexColor.fromHex("#a9adc6");
-  static Color c2 = HexColor.fromHex("#D4BCBC");
-  static Color c3 = HexColor.fromHex("#8bb6b2");
+  static Color lightPurple = HexColor.fromHex("#C5AFFF");
+  static Color neonGreen = HexColor.fromHex("#C8FF29");
+  static Color black = HexColor.fromHex("#0E0E0E");
 }

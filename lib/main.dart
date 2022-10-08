@@ -24,7 +24,7 @@ extension HexColor on Color {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: "./.env");
   runApp(const MyApp());
 }
 
@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         routes: {"/flights/find": (context) => const FindFlights()},
         home: Wrapper());

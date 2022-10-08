@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
         appBar: AppBar(
             title:
                 const Text('Login', style: TextStyle(fontFamily: "Urbanist")),
-            backgroundColor: TonyColors.c3,
+            backgroundColor: TonyColors.neonGreen,
             elevation: 0),
         body: Center(
           child:
@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
             Text(
               "Login",
               style: TextStyle(
-                  color: TonyColors.c1,
+                  color: TonyColors.lightPurple,
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                   fontFamily: "Urbanist"),
