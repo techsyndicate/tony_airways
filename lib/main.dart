@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:tony_airways/screens/flights.dart';
 import 'package:tony_airways/wrapper.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 extension HexColor on Color {
   /// String is in the format "aabbcc" or "ffaabbcc" with an optional leading "#".
@@ -22,7 +24,7 @@ extension HexColor on Color {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
@@ -32,6 +34,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Flutter Demo', home: Wrapper());
+    return MaterialApp(
+        title: 'Flutter Demo',
+        routes: {"/flights/find": (context) => const FindFlights()},
+        home: Wrapper());
   }
 }

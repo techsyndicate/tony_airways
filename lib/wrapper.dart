@@ -18,7 +18,6 @@ class _WrapperState extends State<Wrapper> {
     return StreamBuilder(
       stream: firebaseAuth.idTokenChanges(),
       builder: (context, snapshot) {
-        print('hello');
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
             return HomePage();

@@ -14,17 +14,26 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+            },
+          )
+        ],
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('Home'),
+            const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () {
-                FirebaseAuth.instance.signOut();
+                Navigator.pushNamed(context, '/flights');
               },
-              child: const Text('Logout'),
+              child: const Text('Find Flights'),
             ),
           ],
         ),

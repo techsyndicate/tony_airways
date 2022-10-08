@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tony_airways/main.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:tony_airways/global/TonyColors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -9,28 +12,121 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
+final firestore = FirebaseFirestore.instance;
+
 class _LoginPageState extends State<LoginPage> {
+  final firebaseAuth = FirebaseAuth.instance;
+  final users = firestore.collection("users");
+  String email = "";
+  String pass = "";
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser!.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    try {
+      await users.doc(googleUser.email).set({
+        "name": googleUser.displayName,
+        "email": googleUser.email,
+        "photo": googleUser.photoUrl,
+      });
+    } catch (e) {
+      print(e);
+    }
+
+    // Once signed in, return the UserCredential
+    return await firebaseAuth.signInWithCredential(credential);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-        backgroundColor: HexColor.fromHex("#16e16e"),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('Login'),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     FirebaseAuth.instance.signInAnonymously();
-            //   },
-            //   child: const Text('Login'),
-            // ),
-          ],
-        ),
-      ),
-    );
+        appBar: AppBar(
+            title:
+                const Text('Login', style: TextStyle(fontFamily: "Urbanist")),
+            backgroundColor: TonyColors.c3,
+            elevation: 0),
+        body: Center(
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+            SizedBox(
+              height: 80,
+            ),
+            Text(
+              "Login",
+              style: TextStyle(
+                  color: TonyColors.c1,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Urbanist"),
+            ),
+            const SizedBox(height: 50),
+            // google auth
+            Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  elevation: MaterialStateProperty.all(0),
+                  fixedSize: MaterialStateProperty.all<Size>(Size(300, 60)),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  // added rounded borders
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+                onPressed: () async {
+                  try {
+                    await signInWithGoogle();
+                  } catch (e) {
+                    print(e);
+                    // ios error popup
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text('Error'),
+                          content: const Text('Something went wrong'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('Ok'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                },
+                child: Row(
+                  children: [
+                    const Image(
+                        width: 30,
+                        height: 30,
+                        image: AssetImage("assets/images/google_logo.png")),
+                    const SizedBox(width: 50),
+                    const Text(
+                      'Sign in with Google',
+                      style: TextStyle(
+                          color: Colors.black, fontFamily: "Urbanist"),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ]),
+        ));
   }
 }
