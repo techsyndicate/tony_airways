@@ -37,7 +37,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        routes: {"/flights/find": (context) => const FindFlights()},
+        routes: {
+          "/flights/find": (context) => const FindFlights(),
+          "/flights/view": (context) => ViewFlights(),
+          "/flights/confirm": (context) => FlightConfirm()
+        },
         home: Wrapper());
   }
 }

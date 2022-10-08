@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -137,7 +139,7 @@ class _FindFlightsState extends State<FindFlights> {
                               fontFamily: "Urbanist"),
                           items: const [
                             DropdownMenuItem(
-                              value: "NYC",
+                              value: "JFK",
                               child: Text("New York"),
                             ),
                             DropdownMenuItem(
@@ -321,6 +323,13 @@ class _FindFlightsState extends State<FindFlights> {
                             setState(() {
                               loading = false;
                             });
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return ViewFlights(
+                                  flights: flights,
+                                );
+                              },
+                            ));
                           } catch (e) {
                             print(e);
                             showDialog(
@@ -352,5 +361,111 @@ class _FindFlightsState extends State<FindFlights> {
               ),
             ),
           );
+  }
+}
+
+class ViewFlights extends StatefulWidget {
+  List? flights = [];
+  ViewFlights({Key? key, this.flights}) : super(key: key);
+
+  @override
+  State<ViewFlights> createState() => _ViewFlightsState();
+}
+
+class _ViewFlightsState extends State<ViewFlights> {
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      child: SafeArea(
+        child: ListView.builder(
+          itemCount: widget.flights!.length,
+          itemBuilder: (context, index) {
+            return Card(
+              child: ListTile(
+                trailing: ElevatedButton(
+                  child: Text('Book'),
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return FlightBook(
+                          flight:
+                              Map<String, dynamic>.from(widget.flights![index]),
+                        );
+                      },
+                    ));
+                  },
+                ),
+                title: Text(
+                    "${widget.flights![index]['itineraries'][0]['segments'][0]['departure']['at']} - ${widget.flights![index]['itineraries'][0]['segments'][0]['arrival']['at']}"),
+                subtitle: Text(widget.flights![index]['price']['total']),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class FlightBook extends StatefulWidget {
+  Map? flight;
+  FlightBook({Key? key, this.flight}) : super(key: key);
+
+  @override
+  State<FlightBook> createState() => _FlightBookState();
+}
+
+class _FlightBookState extends State<FlightBook> {
+  final users = firestore.collection("users");
+  final flights = firestore.collection("flights");
+  final auth = FirebaseAuth.instance;
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+        child: SafeArea(
+            child: Column(
+      children: [
+        Text(
+            "${widget.flight!['itineraries'][0]['segments'][0]['departure']['iataCode']} - ${widget.flight!['itineraries'][0]['segments'][0]['arrival']['iataCode']}"),
+        SizedBox(
+          height: 20.0,
+        ),
+        Text("${widget.flight!['price']['total']}"),
+        SizedBox(
+          height: 40.0,
+        ),
+        ElevatedButton(
+          onPressed: () async {
+            try {
+              await flights.add({
+                "flight": widget.flight,
+              });
+              await users.doc(auth.currentUser!.email).update({
+                "flights": FieldValue.arrayUnion([widget.flight])
+              });
+              Navigator.pushNamed(context, "/flights/confirm");
+            } catch (e) {
+              print(e);
+            }
+          },
+          child: Text('Book Flight'),
+        )
+      ],
+    )));
+  }
+}
+
+class FlightConfirm extends StatelessWidget {
+  const FlightConfirm({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      child: SafeArea(
+        child: Center(
+          child: Text('Flight Booked'),
+        ),
+      ),
+    );
   }
 }
