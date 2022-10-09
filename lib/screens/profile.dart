@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tony_airways/screens/flights.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -50,7 +51,15 @@ class _ProfilePageState extends State<ProfilePage> {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => FlightDetail(
+                                              flight: Map<String, dynamic>.from(
+                                                  data['flights'][index]),
+                                            )));
+                              },
                               child: ListTile(
                                 title: Text(
                                     "${data['flights'][index]['itineraries'][0]['segments'][0]['departure']['iataCode']} -> ${data['flights'][index]['itineraries'][0]['segments'][0]['arrival']['iataCode']}"),

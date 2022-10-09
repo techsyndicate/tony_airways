@@ -11,6 +11,7 @@ import 'package:tony_airways/global/loading.dart';
 import 'dart:convert';
 
 import 'package:tony_airways/screens/home.dart';
+import 'package:tony_airways/screens/wheelchair.dart';
 
 class FindFlights extends StatefulWidget {
   const FindFlights({Key? key}) : super(key: key);
@@ -480,6 +481,88 @@ class FlightConfirm extends StatelessWidget {
                 ));
               },
               child: Text('Home'),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class FlightDetail extends StatefulWidget {
+  Map? flight;
+  FlightDetail({Key? key, this.flight}) : super(key: key);
+
+  @override
+  State<FlightDetail> createState() => _FlightDetailState();
+}
+
+class _FlightDetailState extends State<FlightDetail> {
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: TonyColors.black,
+      textStyle: TextStyle(color: TonyColors.neonGreen, fontFamily: 'Urbanist'),
+      child: SafeArea(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 20.0,
+            ),
+            Text('Flight Details'),
+            SizedBox(
+              height: 20.0,
+            ),
+            Text(
+                "${widget.flight!['itineraries'][0]['segments'][0]['departure']['iataCode']} - ${widget.flight!['itineraries'][0]['segments'][0]['arrival']['iataCode']}"),
+            SizedBox(
+              height: 20.0,
+            ),
+            Text("${widget.flight!['price']['total']}"),
+            SizedBox(
+              height: 20.0,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return WheelChairForm(
+                        flight: Map<String, dynamic>.from(widget.flight!));
+                  },
+                ));
+              },
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(TonyColors.lightPurple),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                )),
+              ),
+              child: Container(
+                height: 100.0,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.wheelchair_pickup,
+                        color: TonyColors.neonGreen,
+                        size: 40.0,
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        "Request Wheelchair",
+                        style: TextStyle(
+                            fontFamily: 'Urbanist',
+                            color: TonyColors.neonGreen,
+                            fontSize: 30.0),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             )
           ],
         ),
