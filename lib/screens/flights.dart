@@ -10,6 +10,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tony_airways/global/loading.dart';
 import 'dart:convert';
 
+import 'package:tony_airways/screens/home.dart';
+
 class FindFlights extends StatefulWidget {
   const FindFlights({Key? key}) : super(key: key);
 
@@ -305,6 +307,9 @@ class _FindFlightsState extends State<FindFlights> {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -462,8 +467,21 @@ class FlightConfirm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       child: SafeArea(
-        child: Center(
-          child: Text('Flight Booked'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Flight Booked'),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return HomePage();
+                  },
+                ));
+              },
+              child: Text('Home'),
+            )
+          ],
         ),
       ),
     );

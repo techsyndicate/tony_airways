@@ -35,6 +35,15 @@ class _HomePageState extends State<HomePage> {
               },
               child: const Text('Find Flights'),
             ),
+            SizedBox(
+              height: 20.0,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/profile');
+              },
+              child: const Text('Profile'),
+            ),
           ],
         ),
       ),
