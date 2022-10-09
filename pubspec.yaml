@@ -68,6 +68,9 @@ flutter:
     - assets/images/wheelchair.svg
     - assets/images/cross.svg
     - assets/images/arrow.svg
+    - assets/images/search.svg
+    - assets/images/sort.svg
+    - assets/images/filter.svg
   fonts:
     - family: Urbanist
       fonts:

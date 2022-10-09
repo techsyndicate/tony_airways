@@ -8,6 +8,7 @@ import 'package:tony_airways/global/TonyColors.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tony_airways/global/loading.dart';
+import 'package:tony_airways/main.dart';
 import 'dart:convert';
 
 import 'package:tony_airways/screens/home.dart';
@@ -382,31 +383,202 @@ class _ViewFlightsState extends State<ViewFlights> {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: TonyColors.black,
       child: SafeArea(
-        child: ListView.builder(
-          itemCount: widget.flights!.length,
-          itemBuilder: (context, index) {
-            return Card(
-              child: ListTile(
-                trailing: ElevatedButton(
-                  child: Text('Book'),
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(
-                      builder: (context) {
-                        return FlightBook(
-                          flight:
-                              Map<String, dynamic>.from(widget.flights![index]),
-                        );
-                      },
-                    ));
-                  },
-                ),
-                title: Text(
-                    "${widget.flights![index]['itineraries'][0]['segments'][0]['departure']['at']} - ${widget.flights![index]['itineraries'][0]['segments'][0]['arrival']['at']}"),
-                subtitle: Text(widget.flights![index]['price']['total']),
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(10.0),
+              width: double.infinity,
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 20.0,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SvgPicture.asset(
+                        "assets/images/search.svg",
+                        height: 30.0,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 300.0,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      FloatingActionButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        backgroundColor: TonyColors.black,
+                        child: SvgPicture.asset("assets/images/cross.svg"),
+                      )
+                    ],
+                  )
+                ],
               ),
-            );
-          },
+            ),
+            SizedBox(
+              height: 60.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 37.0,
+                ),
+                Text('Search Results',
+                    style: TextStyle(
+                        fontSize: 30,
+                        color: TonyColors.lightPurple,
+                        fontWeight: FontWeight.bold)),
+              ],
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Text(
+              'Click on a result for more information',
+              style:
+                  TextStyle(fontSize: 20, color: HexColor.fromHex("#C9C9C9")),
+            ),
+            SizedBox(
+              height: 30.0,
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 30.0,
+                ),
+                TextButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(HexColor.fromHex("#171717")),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                        // side: BorderSide(color: TonyColors.lightPurple),
+                      ),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(25, 10, 25, 10),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Time",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "Urbanist",
+                              fontSize: 20),
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        SvgPicture.asset(
+                          "assets/images/sort.svg",
+                          height: 25.0,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 26.7,
+                ),
+                TextButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(HexColor.fromHex("#171717")),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                        // side: BorderSide(color: TonyColors.lightPurple),
+                      ),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(25, 10, 25, 10),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Price",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "Urbanist",
+                              fontSize: 20),
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        SvgPicture.asset(
+                          "assets/images/sort.svg",
+                          height: 25.0,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 26.7,
+                ),
+                SvgPicture.asset("assets/images/filter.svg", height: 25.0),
+              ],
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Expanded(
+              child: ListView.builder(
+                // shrinkWrap: true,
+                itemCount: widget.flights!.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    color: TonyColors.black,
+                    child: Container(
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          border: Border(
+                              top: BorderSide(
+                                  color: HexColor.fromHex("#c9c9c9"),
+                                  width: 1.0))),
+                      child: Column(
+                        children: [Text("hello")],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            )
+            // ListView.builder(
+            //   itemCount: widget.flights!.length,
+            //   itemBuilder: (context, index) {
+            //     return Container(
+            //       decoration: BoxDecoration(
+            //         border: Border(
+            //           top: BorderSide(
+            //             color: HexColor.fromHex("#C9C9C9"),
+            //             width: 1.0,
+            //           ),
+            //         ),
+            //       ),
+            //       child: Column(
+            //         children: [
+            //           Text(
+            //               '${widget.flights![index]['itineraries'][0]['segments'][0]['departure']['iataCode']} - ${widget.flights![index]['itineraries'][0]['segments'][0]['arrival']['iataCode']}'),
+            //         ],
+            //       ),
+            //     );
+            //   },
+            // ),
+          ],
         ),
       ),
     );
@@ -563,7 +735,45 @@ class _FlightDetailState extends State<FlightDetail> {
                   ),
                 ),
               ),
-            )
+            ),
+            SizedBox(
+              height: 30.0,
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(TonyColors.lightPurple),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                )),
+              ),
+              child: Container(
+                height: 100.0,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.wifi,
+                        color: TonyColors.neonGreen,
+                        size: 40.0,
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        "Internet Access",
+                        style: TextStyle(
+                            fontFamily: 'Urbanist',
+                            color: TonyColors.neonGreen,
+                            fontSize: 30.0),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
