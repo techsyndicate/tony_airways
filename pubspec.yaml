@@ -71,6 +71,7 @@ flutter:
     - assets/images/search.svg
     - assets/images/sort.svg
     - assets/images/filter.svg
+    - assets/images/time.svg
   fonts:
     - family: Urbanist
       fonts:

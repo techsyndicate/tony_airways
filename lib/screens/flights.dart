@@ -539,19 +539,119 @@ class _ViewFlightsState extends State<ViewFlights> {
                 // shrinkWrap: true,
                 itemCount: widget.flights!.length,
                 itemBuilder: (context, index) {
-                  return Card(
-                    color: TonyColors.black,
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          border: Border(
-                              top: BorderSide(
-                                  color: HexColor.fromHex("#c9c9c9"),
-                                  width: 1.0))),
-                      child: Column(
-                        children: [Text("hello")],
-                      ),
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      color: TonyColors.black,
+                      child: Container(
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              border: Border(
+                                  top: BorderSide(
+                                      color: Color(0xccc9c9c9), width: 1.0))),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                      "${widget.flights![index]['itineraries'][0]['segments'][0]['departure']['iataCode']}",
+                                      style: TextStyle(
+                                          color: TonyColors.neonGreen,
+                                          fontFamily: 'Urbanist',
+                                          fontSize: 25.0)),
+                                  SvgPicture.asset("assets/images/time.svg",
+                                      height: 25.0),
+                                  Text(
+                                      "${widget.flights![index]['itineraries'][0]['segments'][0]['arrival']['iataCode']}",
+                                      style: TextStyle(
+                                          color: TonyColors.neonGreen,
+                                          fontFamily: 'Urbanist',
+                                          fontSize: 25.0)),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 15.0,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                      "${widget.flights![index]['itineraries'][0]['segments'][0]['departure']['at'].substring(11, 16)}",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Urbanist',
+                                          fontSize: 15.0)),
+                                  Text(
+                                    "shbdjsdjsdjsfjs",
+                                  ),
+                                  Text(
+                                      "${widget.flights![index]['itineraries'][0]['segments'][0]['arrival']['at'].substring(11, 16)}",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Urbanist',
+                                          fontSize: 15.0)),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                        "${widget.flights![index]['price']['total']}",
+                                        style: TextStyle(
+                                            color: TonyColors.lightPurple,
+                                            fontFamily: 'Urbanist',
+                                            fontSize: 20.0)),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => FlightBook(
+                                                    flight: Map<String,
+                                                            dynamic>.from(
+                                                        widget.flights![index]),
+                                                  )),
+                                        );
+                                      },
+                                      style: ButtonStyle(
+                                        shape: MaterialStateProperty.all<
+                                                RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(33.0),
+                                          // side: BorderSide(color: TonyColors.lightPurple),
+                                        )),
+                                        padding: MaterialStateProperty.all(
+                                            EdgeInsets.fromLTRB(
+                                                25, 20, 25, 20)),
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                HexColor.fromHex("161616")),
+                                      ),
+                                      child: Text(
+                                        "Book",
+                                        style: TextStyle(
+                                            fontFamily: "Ubranist",
+                                            fontSize: 20.0,
+                                            color: TonyColors.lightPurple),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          )),
                     ),
                   );
                 },
