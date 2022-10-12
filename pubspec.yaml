@@ -72,6 +72,10 @@ flutter:
     - assets/images/sort.svg
     - assets/images/filter.svg
     - assets/images/time.svg
+    - assets/images/card.svg
+    - assets/images/star.svg
+    - assets/images/crown.svg
+    - assets/images/jewel.svg
   fonts:
     - family: Urbanist
       fonts:
@@ -82,6 +86,20 @@ flutter:
           weight: 500
         - asset: assets/fonts/Urbanist-Light.ttf
           weight: 300
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Poppins-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Poppins-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Poppins-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
 
   # To add assets to your application, add an assets section, like this:
   # assets:

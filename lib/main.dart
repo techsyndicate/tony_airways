@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tony_airways/screens/flights.dart';
+import 'package:tony_airways/screens/member.dart';
 import 'package:tony_airways/screens/profile.dart';
 import 'package:tony_airways/wrapper.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -42,7 +43,8 @@ class MyApp extends StatelessWidget {
           "/flights/find": (context) => const FindFlights(),
           "/flights/view": (context) => ViewFlights(),
           "/flights/confirm": (context) => FlightConfirm(),
-          "/profile": (context) => ProfilePage()
+          "/profile": (context) => ProfilePage(),
+          "/membership": (context) => MemberShip(),
         },
         home: Wrapper());
   }
