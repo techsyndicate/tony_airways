@@ -74,6 +74,7 @@ class _HomePageState extends State<HomePage> {
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> data =
               snapshot.data!.data() as Map<String, dynamic>;
+          print(data);
           return Material(
             color: TonyColors.black,
             child: SafeArea(

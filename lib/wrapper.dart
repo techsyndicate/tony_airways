@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tony_airways/screens/flights.dart';
 import 'package:tony_airways/screens/home.dart';
 import 'package:tony_airways/screens/login.dart';
 
@@ -20,7 +21,7 @@ class _WrapperState extends State<Wrapper> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
-            return HomePage();
+            return FindFlights();
           } else {
             print('login');
             return LoginPage();
