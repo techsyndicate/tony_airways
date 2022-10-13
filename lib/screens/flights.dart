@@ -750,7 +750,7 @@ class _FlightBookState extends State<FlightBook> {
                     backgroundColor: TonyColors.black,
                     child: SvgPicture.asset(
                       "assets/images/cross.svg",
-                      height: 40.0,
+                      height: 50.0,
                     ),
                     onPressed: () {
                       Navigator.pop(context);
@@ -772,6 +772,269 @@ class _FlightBookState extends State<FlightBook> {
                         fontWeight: FontWeight.w500),
                   ),
                 ],
+              ),
+              SizedBox(
+                height: 40.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    '${widget.flight!['itineraries'][0]['segments'][0]['departure']['iataCode']}',
+                    style: TextStyle(
+                      color: TonyColors.neonGreen,
+                      fontFamily: 'Urbanist',
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  // SvgPicture.asset("assets/images/plane2.svg"),
+                  Image.asset(
+                    'assets/images/plane.png',
+                    height: 25.0,
+                    width: 40.0,
+                  ),
+                  Text(
+                    "${widget.flight!['itineraries'][0]['segments'][0]['arrival']['iataCode']}",
+                    style: TextStyle(
+                      color: TonyColors.neonGreen,
+                      fontFamily: 'Urbanist',
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 30.0,
+                        ),
+                        Text(
+                          '${widget.flight!['itineraries'][0]['segments'][0]['departure']['at'].toString().substring(0, 10)}',
+                          style: TextStyle(
+                            color: TonyColors.lightPurple,
+                            fontFamily: 'Urbanist',
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 110.0,
+                        ),
+                        Text(
+                          '${widget.flight!['itineraries'][0]['segments'][0]['arrival']['at'].toString().substring(0, 10)}',
+                          style: TextStyle(
+                            color: TonyColors.lightPurple,
+                            fontFamily: 'Urbanist',
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 60.0,
+                        ),
+                        Text(
+                          '${widget.flight!['itineraries'][0]['segments'][0]['departure']['at'].toString().substring(11, 16)}',
+                          style: TextStyle(
+                            color: TonyColors.lightPurple,
+                            fontFamily: 'Urbanist',
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 170.0,
+                        ),
+                        Text(
+                          '${widget.flight!['itineraries'][0]['segments'][0]['arrival']['at'].toString().substring(11, 16)}',
+                          style: TextStyle(
+                            color: TonyColors.lightPurple,
+                            fontFamily: 'Urbanist',
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 65.0,
+                        ),
+                        Text(
+                          'T-${widget.flight!['itineraries'][0]['segments'][0]['departure']['terminal']}',
+                          style: TextStyle(
+                            color: TonyColors.lightPurple,
+                            fontFamily: 'Urbanist',
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 175.0,
+                        ),
+                        Text(
+                          'T-${widget.flight!['itineraries'][0]['segments'][0]['arrival']['terminal']}',
+                          style: TextStyle(
+                            color: TonyColors.lightPurple,
+                            fontFamily: 'Urbanist',
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 70.0,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Passenger Name',
+                          style: TextStyle(
+                            color: HexColor.fromHex("C9C9C9"),
+                            fontFamily: 'Urbanist',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "${auth.currentUser!.displayName}",
+                          style: TextStyle(
+                            color: TonyColors.lightPurple,
+                            fontFamily: 'Urbanist',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 30.0,
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 50.0,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Price',
+                          style: TextStyle(
+                            color: HexColor.fromHex("C9C9C9"),
+                            fontFamily: 'Urbanist',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "${widget.flight!['price']['total']} ${widget.flight!['price']['currency']}",
+                          style: TextStyle(
+                            color: TonyColors.lightPurple,
+                            fontFamily: 'Urbanist',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 30.0,
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 50.0,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Duration',
+                          style: TextStyle(
+                            color: HexColor.fromHex("C9C9C9"),
+                            fontFamily: 'Urbanist',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "2h 30m",
+                          style: TextStyle(
+                            color: TonyColors.lightPurple,
+                            fontFamily: 'Urbanist',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 30.0,
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 30.0,
+                    ),
+                    Row(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () async {
+                            try {
+                              await flights.add({
+                                "flight": widget.flight,
+                              });
+                              await users.doc(auth.currentUser!.email).update({
+                                "flights":
+                                    FieldValue.arrayUnion([widget.flight])
+                              });
+                              Navigator.pushNamed(context, "/flights/confirm");
+                            } catch (e) {
+                              print(e);
+                            }
+                          },
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all(
+                                EdgeInsets.fromLTRB(25, 15, 25, 15)),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                TonyColors.neonGreen),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16.0),
+                              ),
+                            ),
+                          ),
+                          child: Text(
+                            'Book',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Urbanist',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               )
             ],
           ),
@@ -787,22 +1050,39 @@ class FlightConfirm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: TonyColors.black,
       child: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Flight Booked'),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) {
-                    return HomePage();
-                  },
-                ));
-              },
-              child: Text('Home'),
-            )
-          ],
+        child: Container(
+          padding: EdgeInsets.all(30.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Flight \nBooked',
+                style: TextStyle(
+                  color: TonyColors.lightPurple,
+                  fontSize: 50.0,
+                  fontFamily: 'Urbanist',
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              SizedBox(
+                height: 50.0,
+              ),
+              FloatingActionButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomePage()));
+                },
+                backgroundColor: TonyColors.black,
+                child: Icon(
+                  Icons.home,
+                  size: 40.0,
+                  color: TonyColors.lightPurple,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -20,7 +20,6 @@ class _WrapperState extends State<Wrapper> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
-            print('home');
             return HomePage();
           } else {
             print('login');
