@@ -86,8 +86,10 @@ flutter:
     - assets/images/map.svg
     - assets/images/calender.svg
     - assets/images/green_plane.png
+    - assets/images/green_plane.svg
     - assets/images/menu.png
     - assets/images/black_cross.svg
+    - assets/images/person.svg
   fonts:
     - family: Urbanist
       fonts:
