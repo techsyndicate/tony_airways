@@ -76,6 +76,9 @@ flutter:
     - assets/images/star.svg
     - assets/images/crown.svg
     - assets/images/jewel.svg
+    - assets/images/idk.svg
+    - assets/images/plane.svg
+    - assets/images/barcode.png
   fonts:
     - family: Urbanist
       fonts:
@@ -86,6 +89,8 @@ flutter:
           weight: 500
         - asset: assets/fonts/Urbanist-Light.ttf
           weight: 300
+        - asset: assets/fonts/Urbanist-SemiBold.ttf
+          weight: 600
     - family: Poppins
       fonts:
         - asset: assets/fonts/Poppins-Regular.ttf

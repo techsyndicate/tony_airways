@@ -131,7 +131,10 @@ class _MemberShipState extends State<MemberShip> {
                               borderRadius: BorderRadius.circular(6.0),
                             )),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            print('hello');
+                            Navigator.pushNamed(context, "/vip");
+                          },
                           child: Text(
                             'Learn More',
                             style: TextStyle(
@@ -202,7 +205,10 @@ class _MemberShipState extends State<MemberShip> {
                               borderRadius: BorderRadius.circular(6.0),
                             )),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            print('hello');
+                            Navigator.pushNamed(context, "/vip");
+                          },
                           child: Text(
                             'Learn More',
                             style: TextStyle(
@@ -273,7 +279,10 @@ class _MemberShipState extends State<MemberShip> {
                               borderRadius: BorderRadius.circular(6.0),
                             )),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            print('hello');
+                            Navigator.pushNamed(context, "/vip");
+                          },
                           child: Text(
                             'Learn More',
                             style: TextStyle(
@@ -306,11 +315,34 @@ class _VIPDetailState extends State<VIPDetail> {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: TonyColors.black,
       child: SafeArea(
-        child: Center(
-          child: Text('Vip'),
+          child: Container(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SvgPicture.asset(
+                  'assets/images/card.svg',
+                  height: 40.0,
+                ),
+                FloatingActionButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  backgroundColor: TonyColors.black,
+                  child: SvgPicture.asset(
+                    "assets/images/cross.svg",
+                    height: 40.0,
+                  ),
+                )
+              ],
+            )
+          ],
         ),
-      ),
+      )),
     );
   }
 }

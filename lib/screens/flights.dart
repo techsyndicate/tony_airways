@@ -79,21 +79,23 @@ class _FindFlightsState extends State<FindFlights> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(35.0),
-                    child: Row(children: [
-                      Text('Find Flights',
-                          style: TextStyle(
-                              color: TonyColors.lightPurple,
-                              fontSize: 30,
-                              fontFamily: "Urbanist")),
-                      SizedBox(
-                        width: 180,
-                      ),
-                      Icon(
-                        Icons.search,
-                        color: TonyColors.lightPurple,
-                        size: 30,
-                      )
-                    ]),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Find Flights',
+                              style: TextStyle(
+                                  color: TonyColors.lightPurple,
+                                  fontSize: 30,
+                                  fontFamily: "Urbanist")),
+                          FloatingActionButton(
+                            backgroundColor: TonyColors.black,
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: SvgPicture.asset("assets/images/cross.svg",
+                                height: 40),
+                          )
+                        ]),
                   ),
                   const SizedBox(
                     height: 40,
@@ -699,37 +701,83 @@ class _FlightBookState extends State<FlightBook> {
   final auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
+    // return Material(
+    //     child: SafeArea(
+    //         child: Column(
+    //   children: [
+    //     Text(
+    //         "${widget.flight!['itineraries'][0]['segments'][0]['departure']['iataCode']} - ${widget.flight!['itineraries'][0]['segments'][0]['arrival']['iataCode']}"),
+    //     SizedBox(
+    //       height: 20.0,
+    //     ),
+    //     Text("${widget.flight!['price']['total']}"),
+    //     SizedBox(
+    //       height: 40.0,
+    //     ),
+    //     ElevatedButton(
+    //       onPressed: () async {
+    //         try {
+    //           await flights.add({
+    //             "flight": widget.flight,
+    //           });
+    //           await users.doc(auth.currentUser!.email).update({
+    //             "flights": FieldValue.arrayUnion([widget.flight])
+    //           });
+    //           Navigator.pushNamed(context, "/flights/confirm");
+    //         } catch (e) {
+    //           print(e);
+    //         }
+    //       },
+    //       child: Text('Book Flight'),
+    //     )
+    //   ],
+    // )));
     return Material(
-        child: SafeArea(
-            child: Column(
-      children: [
-        Text(
-            "${widget.flight!['itineraries'][0]['segments'][0]['departure']['iataCode']} - ${widget.flight!['itineraries'][0]['segments'][0]['arrival']['iataCode']}"),
-        SizedBox(
-          height: 20.0,
+      color: TonyColors.black,
+      child: SafeArea(
+        child: Container(
+          padding: EdgeInsets.all(25.0),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SvgPicture.asset(
+                    "assets/images/airplane.svg",
+                    height: 40.0,
+                  ),
+                  FloatingActionButton(
+                    backgroundColor: TonyColors.black,
+                    child: SvgPicture.asset(
+                      "assets/images/cross.svg",
+                      height: 40.0,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 30.0,
+              ),
+              Row(
+                children: [
+                  Text(
+                    'Confirm Flight',
+                    style: TextStyle(
+                        color: TonyColors.lightPurple,
+                        fontSize: 30.0,
+                        fontFamily: 'Urbanist',
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
-        Text("${widget.flight!['price']['total']}"),
-        SizedBox(
-          height: 40.0,
-        ),
-        ElevatedButton(
-          onPressed: () async {
-            try {
-              await flights.add({
-                "flight": widget.flight,
-              });
-              await users.doc(auth.currentUser!.email).update({
-                "flights": FieldValue.arrayUnion([widget.flight])
-              });
-              Navigator.pushNamed(context, "/flights/confirm");
-            } catch (e) {
-              print(e);
-            }
-          },
-          child: Text('Book Flight'),
-        )
-      ],
-    )));
+      ),
+    );
   }
 }
 
@@ -770,111 +818,284 @@ class FlightDetail extends StatefulWidget {
 }
 
 class _FlightDetailState extends State<FlightDetail> {
+  final auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Material(
       color: TonyColors.black,
-      textStyle: TextStyle(color: TonyColors.neonGreen, fontFamily: 'Urbanist'),
       child: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 20.0,
-            ),
-            Text('Flight Details'),
-            SizedBox(
-              height: 20.0,
-            ),
-            Text(
-                "${widget.flight!['itineraries'][0]['segments'][0]['departure']['iataCode']} - ${widget.flight!['itineraries'][0]['segments'][0]['arrival']['iataCode']}"),
-            SizedBox(
-              height: 20.0,
-            ),
-            Text("${widget.flight!['price']['total']}"),
-            SizedBox(
-              height: 20.0,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) {
-                    return WheelChairForm(
-                        flight: Map<String, dynamic>.from(widget.flight!));
-                  },
-                ));
-              },
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all(TonyColors.lightPurple),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                )),
+        child: Container(
+          padding: EdgeInsets.all(25.0),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SvgPicture.asset(
+                    "assets/images/idk.svg",
+                    height: 40.0,
+                  ),
+                  FloatingActionButton(
+                    backgroundColor: TonyColors.black,
+                    child: SvgPicture.asset("assets/images/cross.svg"),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
               ),
-              child: Container(
-                height: 100.0,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
+              SizedBox(
+                height: 30.0,
+              ),
+              Row(
+                children: [
+                  Text(
+                    "Your Boarding Pass",
+                    style: TextStyle(
+                        color: TonyColors.lightPurple,
+                        fontFamily: "Urbanist",
+                        fontSize: 30.0),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Row(
+                children: [
+                  Text(
+                    'Happy Journey',
+                    style: TextStyle(
+                        color: HexColor.fromHex("C9C9C9"),
+                        fontFamily: "Poppins",
+                        fontWeight: FontWeight.w300,
+                        fontSize: 15.0),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.all(25.0),
+                  decoration: BoxDecoration(
+                    color: TonyColors.lightPurple,
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  child: Column(
                     children: [
-                      Icon(
-                        Icons.wheelchair_pickup,
-                        color: TonyColors.neonGreen,
-                        size: 40.0,
+                      Row(
+                        children: [
+                          Text(
+                            "${widget.flight!['itineraries'][0]['segments'][0]['departure']['at'].toString().substring(0, 10)}",
+                            style: TextStyle(
+                                color: HexColor.fromHex('7A67AC'),
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'Urbanist',
+                                fontSize: 20.0),
+                          )
+                        ],
                       ),
                       SizedBox(
-                        width: 20,
+                        height: 20.0,
                       ),
-                      Text(
-                        "Request Wheelchair",
-                        style: TextStyle(
-                            fontFamily: 'Urbanist',
-                            color: TonyColors.neonGreen,
-                            fontSize: 30.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                            "${widget.flight!['itineraries'][0]['segments'][0]['departure']['iataCode']}",
+                            style: TextStyle(
+                                color: HexColor.fromHex('0E0E0E'),
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'Urbanist',
+                                fontSize: 25.0),
+                          ),
+                          SvgPicture.asset(
+                            "assets/images/plane.svg",
+                            height: 35.0,
+                          ),
+                          Text(
+                              "${widget.flight!['itineraries'][0]['segments'][0]['arrival']['iataCode']}",
+                              style: TextStyle(
+                                  color: HexColor.fromHex('0E0E0E'),
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: 'Urbanist',
+                                  fontSize: 25.0)),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 50.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Seat",
+                            style: TextStyle(
+                                color: HexColor.fromHex('7A67AC'),
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'Urbanist',
+                                fontSize: 20.0),
+                          ),
+                          Text(
+                            "Flight",
+                            style: TextStyle(
+                                color: HexColor.fromHex('7A67AC'),
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'Urbanist',
+                                fontSize: 20.0),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "44D",
+                            style: TextStyle(
+                                fontFamily: "Urbanist",
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20.0,
+                                color: HexColor.fromHex("0E0E0E")),
+                          ),
+                          Text(
+                            "TA042",
+                            style: TextStyle(
+                                fontFamily: "Urbanist",
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20.0,
+                                color: HexColor.fromHex("0E0E0E")),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Passenger",
+                            style: TextStyle(
+                                fontFamily: "Urbanist",
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20.0,
+                                color: HexColor.fromHex("7A67AC")),
+                          ),
+                          Text(
+                            "Duration",
+                            style: TextStyle(
+                                fontFamily: "Urbanist",
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20.0,
+                                color: HexColor.fromHex("7A67AC")),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "${auth.currentUser!.displayName}",
+                            style: TextStyle(
+                                fontFamily: "Urbanist",
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20.0,
+                                color: HexColor.fromHex("0E0E0E")),
+                          ),
+                          Text(
+                            "2h 30m",
+                            style: TextStyle(
+                                fontFamily: "Urbanist",
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20.0,
+                                color: HexColor.fromHex("0E0E0E")),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                      Image.network(
+                        "https://media.discordapp.net/attachments/1028134535625453651/1029996978605658122/unknown.png",
+                        width: 300.0,
+                      ),
+                      SizedBox(
+                        height: 20.0,
                       ),
                     ],
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 30.0,
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all(TonyColors.lightPurple),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                )),
+              SizedBox(
+                height: 20.0,
               ),
-              child: Container(
-                height: 100.0,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.wifi,
-                        color: TonyColors.neonGreen,
-                        size: 40.0,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      padding: MaterialStateProperty.all<EdgeInsets>(
+                          EdgeInsets.fromLTRB(15, 20, 15, 20)),
+                      backgroundColor:
+                          MaterialStateProperty.all(TonyColors.neonGreen),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6.0),
+                        ),
                       ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text(
-                        "Internet Access",
-                        style: TextStyle(
-                            fontFamily: 'Urbanist',
-                            color: TonyColors.neonGreen,
-                            fontSize: 30.0),
-                      ),
-                    ],
+                    ),
+                    child: Text(
+                      "Print",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Urbanist',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20.0),
+                    ),
+                    onPressed: () {},
                   ),
-                ),
-              ),
-            ),
-          ],
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WheelChairForm(
+                                    flight: Map<String, dynamic>.from(
+                                        widget.flight!),
+                                  )));
+                    },
+                    style: ButtonStyle(
+                      padding: MaterialStateProperty.all<EdgeInsets>(
+                          EdgeInsets.fromLTRB(55, 20, 55, 20)),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6.0),
+                        ),
+                      ),
+                      backgroundColor:
+                          MaterialStateProperty.all(HexColor.fromHex("2B2B2B")),
+                    ),
+                    child: Text(
+                      'Wheelchair',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Urbanist',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20.0),
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -45,6 +45,7 @@ class MyApp extends StatelessWidget {
           "/flights/confirm": (context) => FlightConfirm(),
           "/profile": (context) => ProfilePage(),
           "/membership": (context) => MemberShip(),
+          "/vip": (context) => VIPDetail()
         },
         home: Wrapper());
   }
